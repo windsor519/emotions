@@ -15,6 +15,8 @@
       --sky: #a8d8ea;
       --gold: #f2b84b;
       --ink: #2f2630;
+      --muted: #6f6170;
+      --paper: rgba(255, 255, 255, .9);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
@@ -26,48 +28,70 @@
       background:
         radial-gradient(circle at top left, rgba(255, 207, 186, .8), transparent 34rem),
         radial-gradient(circle at bottom right, rgba(168, 216, 234, .7), transparent 30rem),
-        var(--cream);
+        linear-gradient(160deg, var(--cream), #fffdf8 55%, #f6fbff);
       color: var(--ink);
       display: grid;
       place-items: center;
-      padding: 1rem;
+      padding: clamp(.8rem, 2vw, 1.5rem);
     }
 
     main {
-      width: min(960px, 100%);
+      width: min(1040px, 100%);
       background: rgba(255, 255, 255, .82);
       border: 1px solid rgba(91, 59, 88, .12);
-      border-radius: 28px;
+      border-radius: 32px;
       box-shadow: 0 24px 70px rgba(91, 59, 88, .18);
       overflow: hidden;
+      backdrop-filter: blur(10px);
     }
 
     header {
-      padding: 2rem;
-      background: linear-gradient(135deg, rgba(255, 207, 186, .75), rgba(168, 216, 234, .65));
+      position: relative;
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      background:
+        linear-gradient(135deg, rgba(255, 207, 186, .8), rgba(168, 216, 234, .65)),
+        radial-gradient(circle at 82% 18%, rgba(255, 248, 236, .8), transparent 12rem);
     }
 
-    h1 { margin: 0 0 .35rem; font-size: clamp(2rem, 5vw, 4rem); color: var(--plum); }
+    header::after {
+      content: "";
+      position: absolute;
+      inset: auto 2rem -24px auto;
+      width: 120px;
+      height: 120px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .35);
+      border: 1px solid rgba(255, 255, 255, .45);
+    }
+
+    h1 { margin: 0 0 .35rem; font-size: clamp(2.2rem, 6vw, 4.6rem); color: var(--plum); line-height: .95; }
+    h2 { color: var(--plum); }
     p { line-height: 1.55; }
 
-    .tagline { margin: 0; max-width: 58ch; font-size: 1.1rem; }
+    .tagline { margin: 0; max-width: 62ch; font-size: 1.1rem; }
 
     .game {
       display: grid;
-      grid-template-columns: 1fr 1.2fr;
+      grid-template-columns: minmax(280px, .9fr) minmax(0, 1.35fr);
       gap: 1.2rem;
       padding: 1.2rem;
     }
 
     .panel {
-      background: white;
-      border-radius: 22px;
+      background: var(--paper);
+      border-radius: 24px;
       border: 1px solid rgba(91, 59, 88, .12);
-      padding: 1.2rem;
+      padding: clamp(1rem, 2vw, 1.35rem);
+    }
+
+    .coach-card {
+      display: grid;
+      gap: 1rem;
+      align-content: start;
     }
 
     .meters { display: grid; gap: 1rem; }
-    .meter-label { display: flex; justify-content: space-between; font-weight: 800; color: var(--plum); }
+    .meter-label { display: flex; justify-content: space-between; gap: 1rem; font-weight: 800; color: var(--plum); }
     .bar { height: 18px; border-radius: 99px; background: #eee5e8; overflow: hidden; }
     .fill { height: 100%; width: 50%; border-radius: inherit; transition: width .35s ease; }
     #calmFill { background: linear-gradient(90deg, var(--sage), var(--sky)); }
@@ -77,33 +101,62 @@
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: .7rem;
-      margin-top: 1rem;
+      margin-top: .2rem;
     }
 
     .step {
       padding: .85rem;
-      border-radius: 16px;
+      border-radius: 18px;
       background: var(--cream);
       border: 1px dashed rgba(91, 59, 88, .25);
     }
 
-    .step strong { display: block; color: var(--plum); }
+    .step strong { display: block; color: var(--plum); margin-bottom: .15rem; }
 
-    .scenario {
-      min-height: 150px;
-      border-radius: 20px;
-      padding: 1.2rem;
-      background: linear-gradient(135deg, rgba(255, 248, 236, .95), rgba(255, 207, 186, .45));
-      border: 1px solid rgba(239, 127, 131, .2);
+    .status-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .55rem;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: .9rem;
     }
 
-    .scenario h2 { margin-top: 0; color: var(--plum); }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      border-radius: 999px;
+      padding: .42rem .7rem;
+      background: rgba(91, 59, 88, .08);
+      color: var(--plum);
+      font-size: .9rem;
+      font-weight: 800;
+    }
+
+    .streak {
+      background: rgba(143, 185, 168, .18);
+      color: #426e5d;
+    }
+
+    .scenario {
+      min-height: 180px;
+      border-radius: 22px;
+      padding: clamp(1rem, 2.4vw, 1.4rem);
+      background: linear-gradient(135deg, rgba(255, 248, 236, .95), rgba(255, 207, 186, .45));
+      border: 1px solid rgba(239, 127, 131, .2);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6);
+      transition: transform .2s ease, opacity .2s ease;
+    }
+
+    .scenario.is-changing { transform: translateY(4px); opacity: .35; }
+    .scenario h2 { margin-top: 0; margin-bottom: .45rem; }
 
     .choices { display: grid; gap: .8rem; margin-top: 1rem; }
 
     button {
       border: 0;
-      border-radius: 16px;
+      border-radius: 18px;
       padding: 1rem;
       font: inherit;
       font-weight: 800;
@@ -120,31 +173,90 @@
       outline: 3px solid rgba(143, 185, 168, .6);
     }
 
+    button:disabled {
+      cursor: not-allowed;
+      opacity: .72;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .choice-button {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: .75rem;
+      align-items: start;
+      line-height: 1.35;
+    }
+
+    .choice-number {
+      display: grid;
+      place-items: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .7);
+      color: var(--plum);
+      flex: 0 0 auto;
+    }
+
     .primary {
       background: var(--plum);
       color: white;
       text-align: center;
       width: 100%;
-      margin-top: 1rem;
+      margin-top: .2rem;
     }
 
     .feedback {
       margin-top: 1rem;
       padding: 1rem;
-      border-radius: 18px;
+      border-radius: 20px;
       background: rgba(143, 185, 168, .18);
       border: 1px solid rgba(143, 185, 168, .35);
-      min-height: 86px;
+      min-height: 96px;
     }
 
+    .feedback strong { color: var(--plum); }
+
     .microcopy {
-      color: #6f6170;
+      color: var(--muted);
       font-size: .92rem;
+    }
+
+    .breath-prompt {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: .8rem;
+      align-items: center;
+      padding: .9rem;
+      border-radius: 20px;
+      background: rgba(168, 216, 234, .2);
+      color: var(--plum);
+      font-weight: 700;
+    }
+
+    .breath-orb {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #fff 20%, var(--sky));
+      animation: breathe 5s ease-in-out infinite;
+      box-shadow: 0 0 0 8px rgba(168, 216, 234, .22);
+    }
+
+    @keyframes breathe {
+      0%, 100% { transform: scale(.82); }
+      48% { transform: scale(1.08); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; scroll-behavior: auto !important; transition: none !important; }
     }
 
     @media (max-width: 760px) {
       .game { grid-template-columns: 1fr; }
       .routine { grid-template-columns: 1fr; }
+      header::after { display: none; }
     }
   </style>
 </head>
@@ -156,14 +268,20 @@
     </header>
 
     <section class="game" aria-label="Calm Coach game">
-      <aside class="panel">
-        <h2>S.C.A.N. Calm</h2>
-        <p class="microcopy">Use this tiny routine before you speak. Your goal is not perfect parenting. Your goal is one regulated next move.</p>
-        <div class="routine">
+      <aside class="panel coach-card">
+        <div>
+          <h2>S.C.A.N. Calm</h2>
+          <p class="microcopy">Use this tiny routine before you speak. Your goal is not perfect parenting. Your goal is one regulated next move.</p>
+        </div>
+        <div class="routine" aria-label="S.C.A.N. calm steps">
           <div class="step"><strong>S — Stop</strong>Unclench. Plant your feet.</div>
           <div class="step"><strong>C — Check</strong>Ask: “What am I feeling?”</div>
           <div class="step"><strong>A — Anchor</strong>One slow exhale, longer than inhale.</div>
           <div class="step"><strong>N — Name</strong>Name the need before the behavior.</div>
+        </div>
+        <div class="breath-prompt" aria-label="Breathing prompt">
+          <div class="breath-orb" aria-hidden="true"></div>
+          <span>Try one quiet breath before every click: inhale gently, then make the exhale longer.</span>
         </div>
         <div class="meters" aria-live="polite">
           <div>
@@ -179,7 +297,11 @@
       </aside>
 
       <section class="panel">
-        <div class="scenario">
+        <div class="status-strip">
+          <span class="pill" id="roundPill">Round 1 of 5</span>
+          <span class="pill streak" id="streakPill">Steady streak: 0</span>
+        </div>
+        <div class="scenario" id="scenarioCard">
           <h2 id="scenarioTitle"></h2>
           <p id="scenarioText"></p>
         </div>
@@ -217,12 +339,33 @@
           { text: "Argue point-by-point about how many stories you already read.", calm: -7, storm: 9, note: "Debate invites more debate. Repeat the boundary like a calm chorus." },
           { text: "Threaten to take away tomorrow's stories.", calm: -12, storm: 14, note: "Threats can escalate panic. Try a repair and restate the next safe step." }
         ]
+      },
+      {
+        title: "Grocery aisle thunder",
+        text: "Your child spots cookies at checkout and melts down when you say no. People are staring, and your jaw tightens.",
+        choices: [
+          { text: "Soften your shoulders and say: 'Cookies look so good. The answer is no today. You can squeeze my hand or help scan bananas.'", calm: 15, storm: -13, note: "You held the limit while giving a job for the big energy." },
+          { text: "Hiss: 'Everyone is looking at you. Stop embarrassing me.'", calm: -15, storm: 18, note: "Public pressure is intense. Repair by making your voice private and your message simple." },
+          { text: "Buy the cookies so the crying stops immediately.", calm: -6, storm: 8, note: "Rescue can feel peaceful for one minute, but a clear no with comfort builds trust." }
+        ]
+      },
+      {
+        title: "Screen-time cliff",
+        text: "The tablet timer ends. Your child yells, 'I hate you!' and clutches the screen to their chest.",
+        choices: [
+          { text: "Breathe low and say: 'It is hard to stop. I will keep the tablet safe. You can stomp to the couch or crawl like a bear.'", calm: 17, storm: -15, note: "You did not argue with the words; you guided the transition." },
+          { text: "Grab the tablet and shout: 'Fine, no screens for a month!'", calm: -17, storm: 19, note: "Big consequences often come from our alarm. Shrink it: repair, then name the next step." },
+          { text: "Give five more minutes without saying anything.", calm: -5, storm: 7, note: "A quiet extension may postpone the storm. Pair flexibility with a clear new plan." }
+        ]
       }
     ];
 
+    const totalRounds = scenarios.length;
     let calm = 50;
     let storm = 50;
     let round = 0;
+    let steadyStreak = 0;
+    let isComplete = false;
 
     const clamp = value => Math.max(0, Math.min(100, value));
 
@@ -233,34 +376,62 @@
       stormScore.textContent = storm;
       calmFill.style.width = `${calm}%`;
       stormFill.style.width = `${storm}%`;
+      streakPill.textContent = `Steady streak: ${steadyStreak}`;
     }
 
     function renderScenario() {
-      const scenario = scenarios[round % scenarios.length];
+      if (round >= totalRounds) {
+        renderSummary();
+        return;
+      }
+
+      isComplete = false;
+      const scenario = scenarios[round];
+      scenarioCard.classList.remove("is-changing");
+      roundPill.textContent = `Round ${round + 1} of ${totalRounds}`;
       scenarioTitle.textContent = scenario.title;
       scenarioText.textContent = scenario.text;
       choices.innerHTML = "";
-      scenario.choices.forEach(choice => {
+      scenario.choices.forEach((choice, index) => {
         const button = document.createElement("button");
-        button.textContent = choice.text;
+        button.className = "choice-button";
+        button.innerHTML = `<span class="choice-number">${index + 1}</span><span>${choice.text}</span>`;
         button.addEventListener("click", () => choose(choice));
         choices.appendChild(button);
       });
     }
 
     function choose(choice) {
+      if (isComplete) return;
+
       calm += choice.calm;
       storm += choice.storm;
+      steadyStreak = choice.calm > 0 ? steadyStreak + 1 : 0;
       updateMeters();
-      feedback.textContent = choice.note;
+      feedback.innerHTML = `<strong>Coach note:</strong> ${choice.note}`;
       round += 1;
-      setTimeout(renderScenario, 700);
+      scenarioCard.classList.add("is-changing");
+      choices.querySelectorAll("button").forEach(button => button.disabled = true);
+      setTimeout(renderScenario, 850);
+    }
+
+    function renderSummary() {
+      isComplete = true;
+      scenarioCard.classList.remove("is-changing");
+      roundPill.textContent = "Practice complete";
+      scenarioTitle.textContent = calm >= storm ? "You built a steadier pause" : "Repair is part of calm";
+      scenarioText.textContent = calm >= storm
+        ? "Your final scores show more regulation than storm. Try another round and see if you can keep your voice even softer."
+        : "The storm ran high this time, and that is useful information. Reset, practice the repair lines, and give yourself the same compassion you are practicing with your child.";
+      choices.innerHTML = "";
+      feedback.innerHTML = `<strong>Final score:</strong> Mom calm ${calm}, storm meter ${storm}. One regulated next move is a win.`;
     }
 
     resetButton.addEventListener("click", () => {
       calm = 50;
       storm = 50;
       round = 0;
+      steadyStreak = 0;
       feedback.textContent = "Choose a response. After each choice, read the coaching note out loud like a mini rehearsal.";
       updateMeters();
       renderScenario();
