@@ -7,13 +7,15 @@
   <style>
     :root {
       color-scheme: light;
-      --cream: #fff8ec;
-      --peach: #ffcfba;
-      --rose: #ef7f83;
-      --plum: #5b3b58;
-      --sage: #8fb9a8;
-      --sky: #a8d8ea;
-      --gold: #f2b84b;
+      --cream: #fff3fb;
+      --peach: #ffc0df;
+      --rose: #ff69a6;
+      --plum: #67305f;
+      --sage: #d78bd7;
+      --sky: #ffd6ee;
+      --gold: #ffb7d5;
+      --blush: #ffe5f4;
+      --hot-pink: #ec3f91;
       --ink: #2f2630;
       --muted: #6f6170;
       --paper: rgba(255, 255, 255, .9);
@@ -26,9 +28,10 @@
       margin: 0;
       min-height: 100vh;
       background:
-        radial-gradient(circle at top left, rgba(255, 207, 186, .8), transparent 34rem),
-        radial-gradient(circle at bottom right, rgba(168, 216, 234, .7), transparent 30rem),
-        linear-gradient(160deg, var(--cream), #fffdf8 55%, #f6fbff);
+        radial-gradient(circle at top left, rgba(255, 105, 166, .42), transparent 34rem),
+        radial-gradient(circle at 78% 12%, rgba(255, 192, 223, .65), transparent 26rem),
+        radial-gradient(circle at bottom right, rgba(255, 214, 238, .85), transparent 30rem),
+        linear-gradient(160deg, var(--cream), #fff7fc 55%, #ffeef8);
       color: var(--ink);
       display: grid;
       place-items: center;
@@ -40,7 +43,7 @@
       background: rgba(255, 255, 255, .82);
       border: 1px solid rgba(91, 59, 88, .12);
       border-radius: 32px;
-      box-shadow: 0 24px 70px rgba(91, 59, 88, .18);
+      box-shadow: 0 24px 70px rgba(236, 63, 145, .20);
       overflow: hidden;
       backdrop-filter: blur(10px);
     }
@@ -49,8 +52,8 @@
       position: relative;
       padding: clamp(1.5rem, 4vw, 2.5rem);
       background:
-        linear-gradient(135deg, rgba(255, 207, 186, .8), rgba(168, 216, 234, .65)),
-        radial-gradient(circle at 82% 18%, rgba(255, 248, 236, .8), transparent 12rem);
+        linear-gradient(135deg, rgba(255, 192, 223, .95), rgba(255, 105, 166, .35)),
+        radial-gradient(circle at 82% 18%, rgba(255, 255, 255, .9), transparent 12rem);
     }
 
     header::after {
@@ -92,10 +95,10 @@
 
     .meters { display: grid; gap: 1rem; }
     .meter-label { display: flex; justify-content: space-between; gap: 1rem; font-weight: 800; color: var(--plum); }
-    .bar { height: 18px; border-radius: 99px; background: #eee5e8; overflow: hidden; }
+    .bar { height: 18px; border-radius: 99px; background: #f6ddeb; overflow: hidden; }
     .fill { height: 100%; width: 50%; border-radius: inherit; transition: width .35s ease; }
-    #calmFill { background: linear-gradient(90deg, var(--sage), var(--sky)); }
-    #stormFill { background: linear-gradient(90deg, var(--gold), var(--rose)); }
+    #calmFill { background: linear-gradient(90deg, #d78bd7, #ff9cc9); }
+    #stormFill { background: linear-gradient(90deg, var(--gold), var(--hot-pink)); }
 
     .routine {
       display: grid;
@@ -135,16 +138,16 @@
     }
 
     .streak {
-      background: rgba(143, 185, 168, .18);
-      color: #426e5d;
+      background: rgba(255, 105, 166, .16);
+      color: var(--plum);
     }
 
     .scenario {
       min-height: 180px;
       border-radius: 22px;
       padding: clamp(1rem, 2.4vw, 1.4rem);
-      background: linear-gradient(135deg, rgba(255, 248, 236, .95), rgba(255, 207, 186, .45));
-      border: 1px solid rgba(239, 127, 131, .2);
+      background: linear-gradient(135deg, rgba(255, 243, 251, .98), rgba(255, 192, 223, .58));
+      border: 1px solid rgba(236, 63, 145, .22);
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6);
       transition: transform .2s ease, opacity .2s ease;
     }
@@ -161,7 +164,7 @@
       font: inherit;
       font-weight: 800;
       color: var(--plum);
-      background: #f7ebef;
+      background: var(--blush);
       cursor: pointer;
       text-align: left;
       transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
@@ -170,7 +173,7 @@
     button:hover, button:focus-visible {
       transform: translateY(-2px);
       box-shadow: 0 10px 24px rgba(91, 59, 88, .14);
-      outline: 3px solid rgba(143, 185, 168, .6);
+      outline: 3px solid rgba(255, 105, 166, .38);
     }
 
     button:disabled {
@@ -211,8 +214,8 @@
       margin-top: 1rem;
       padding: 1rem;
       border-radius: 20px;
-      background: rgba(143, 185, 168, .18);
-      border: 1px solid rgba(143, 185, 168, .35);
+      background: rgba(255, 214, 238, .55);
+      border: 1px solid rgba(236, 63, 145, .25);
       min-height: 96px;
     }
 
@@ -230,7 +233,7 @@
       align-items: center;
       padding: .9rem;
       border-radius: 20px;
-      background: rgba(168, 216, 234, .2);
+      background: rgba(255, 192, 223, .35);
       color: var(--plum);
       font-weight: 700;
     }
@@ -239,9 +242,9 @@
       width: 42px;
       height: 42px;
       border-radius: 999px;
-      background: radial-gradient(circle, #fff 20%, var(--sky));
+      background: radial-gradient(circle, #fff 18%, #ff9cc9 72%, var(--rose));
       animation: breathe 5s ease-in-out infinite;
-      box-shadow: 0 0 0 8px rgba(168, 216, 234, .22);
+      box-shadow: 0 0 0 8px rgba(255, 105, 166, .18);
     }
 
     @keyframes breathe {
@@ -264,14 +267,14 @@
   <main>
     <header>
       <h1>Calm Coach</h1>
-      <p class="tagline">A gentle practice game for moms: build the pause, scan your body, and choose a steady response during kid meltdowns.</p>
+      <p class="tagline">A gentle practice game for moms: build the pause, scan your body, and choose a steady response during bedtime, end-of-day, and kid-meltdown moments.</p>
     </header>
 
     <section class="game" aria-label="Calm Coach game">
       <aside class="panel coach-card">
         <div>
           <h2>S.C.A.N. Calm</h2>
-          <p class="microcopy">Use this tiny routine before you speak. Your goal is not perfect parenting. Your goal is one regulated next move.</p>
+          <p class="microcopy">Use this tiny routine before you speak. Your goal is not perfect parenting. Your goal is one regulated next move, especially when everyone is tired.</p>
         </div>
         <div class="routine" aria-label="S.C.A.N. calm steps">
           <div class="step"><strong>S — Stop</strong>Unclench. Plant your feet.</div>
@@ -281,7 +284,7 @@
         </div>
         <div class="breath-prompt" aria-label="Breathing prompt">
           <div class="breath-orb" aria-hidden="true"></div>
-          <span>Try one quiet breath before every click: inhale gently, then make the exhale longer.</span>
+          <span>Try one quiet bedtime-pink breath before every click: inhale gently, then make the exhale longer.</span>
         </div>
         <div class="meters" aria-live="polite">
           <div>
@@ -314,53 +317,99 @@
   <script>
     const scenarios = [
       {
-        title: "The shoe volcano",
-        text: "Your child screams, drops to the floor, and kicks one shoe across the room because it feels 'wrong.' You are already late.",
+        title: "Pajama seam emergency",
+        text: "It is 7:42 p.m. Your child says every pajama tag is scratchy, flings the drawer open, and wails that bedtime is ruined.",
         choices: [
-          { text: "S.C.A.N.: plant feet, exhale, say: 'The shoe feels awful. I can help. First one breath with me.'", calm: 16, storm: -14, note: "You named the sensory problem and slowed the room down before solving." },
-          { text: "Say: 'Stop it. We are late because of you.'", calm: -14, storm: 18, note: "That is an understandable stress reaction. Repair move: 'I got sharp. I am trying again.'" },
-          { text: "Silently force the shoe on to get out the door.", calm: -8, storm: 12, note: "Fast fixes can cost connection. Try offering two choices after your breath." }
+          { text: "S.C.A.N.: soften your face and say, 'Your body wants cozy. Two pajama choices, then lights dim.'", calm: 17, storm: -15, note: "You treated sensory discomfort as real and kept the bedtime lane clear." },
+          { text: "Say: 'You wore these yesterday. Stop making this so hard.'", calm: -12, storm: 15, note: "Tired brains reach for logic. Repair by naming comfort first, then repeat the limit." },
+          { text: "Dump every pajama option on the bed and tell them to figure it out.", calm: -7, storm: 10, note: "Too many choices can flood a tired child. Offer two calm options instead." }
         ]
       },
       {
-        title: "Snack cup disaster",
-        text: "The blue cup is dirty. Your child sobs that the green cup is 'the worst cup in the whole world.'",
+        title: "One more sip loop",
+        text: "Lights are out. Your child asks for water, a hug, water again, and then says their blanket is 'too rectangle.' You feel your patience thinning.",
         choices: [
-          { text: "Whisper to yourself: 'Small cup, big feelings.' Then offer: 'Blue cup after washing, or green cup with a silly straw?'", calm: 14, storm: -12, note: "You kept the problem small while respecting the feeling." },
-          { text: "Lecture about gratitude and all the children who would love any cup.", calm: -8, storm: 10, note: "Logic rarely lands during alarm. Save teaching for after connection." },
-          { text: "Walk away and slam the cabinet.", calm: -16, storm: 16, note: "If you need space, narrate safety: 'I am taking ten seconds so I do not yell.'" }
+          { text: "Take one slow exhale: 'Last sip, last tuck, then my quiet hand on your back for one minute.'", calm: 18, storm: -16, note: "A kind final ritual gives connection without reopening negotiations." },
+          { text: "Snap: 'If you ask again, I am leaving and closing the door.'", calm: -14, storm: 17, note: "Alarm makes exits feel scary. Try a predictable goodnight script instead." },
+          { text: "Keep returning with new fixes until they finally fall asleep.", calm: -5, storm: 8, note: "Endless helping can teach the loop to grow. Warm closure is still loving." }
         ]
       },
       {
-        title: "Bedtime bargaining",
-        text: "After three stories, your child screams for another and says you are mean. Your chest gets hot.",
+        title: "After-school crash",
+        text: "The backpack lands in the hallway, shoes fly, and your child growls when you ask about homework. Dinner is not started yet.",
         choices: [
-          { text: "Put a hand on your heart, lower your voice, and say: 'You wish stories never ended. Bedtime is still now. I will sit for two quiet minutes.'", calm: 18, storm: -16, note: "Warm boundary: empathy plus limit. That is co-regulation." },
-          { text: "Argue point-by-point about how many stories you already read.", calm: -7, storm: 9, note: "Debate invites more debate. Repeat the boundary like a calm chorus." },
-          { text: "Threaten to take away tomorrow's stories.", calm: -12, storm: 14, note: "Threats can escalate panic. Try a repair and restate the next safe step." }
+          { text: "Think 'low fuel' and say: 'No questions yet. Snack, couch, then we make the tiny homework plan.'", calm: 16, storm: -13, note: "You read the end-of-day crash as depletion, not defiance." },
+          { text: "Fire off five questions because you need to know what is due.", calm: -8, storm: 11, note: "Information can wait until the nervous system has fuel." },
+          { text: "Match the growl and complain about how hard your day was too.", calm: -13, storm: 16, note: "Your hard day matters. First stabilize the room, then share appropriately later." }
         ]
       },
       {
-        title: "Grocery aisle thunder",
-        text: "Your child spots cookies at checkout and melts down when you say no. People are staring, and your jaw tightens.",
+        title: "Bath-time refusal",
+        text: "Your child smells like playground, but they shout 'No bath ever!' and hide behind the couch as the evening clock keeps moving.",
         choices: [
-          { text: "Soften your shoulders and say: 'Cookies look so good. The answer is no today. You can squeeze my hand or help scan bananas.'", calm: 15, storm: -13, note: "You held the limit while giving a job for the big energy." },
-          { text: "Hiss: 'Everyone is looking at you. Stop embarrassing me.'", calm: -15, storm: 18, note: "Public pressure is intense. Repair by making your voice private and your message simple." },
-          { text: "Buy the cookies so the crying stops immediately.", calm: -6, storm: 8, note: "Rescue can feel peaceful for one minute, but a clear no with comfort builds trust." }
+          { text: "Crouch nearby: 'Bath is happening. Do you want dinosaur steps or tiptoe steps to the tub?'", calm: 15, storm: -12, note: "You held the non-negotiable while giving playful control." },
+          { text: "Drag them out from behind the couch while listing consequences.", calm: -15, storm: 18, note: "Force may win the minute and lose regulation. Reset with proximity and choice." },
+          { text: "Cancel the bath and stew silently about it all night.", calm: -6, storm: 7, note: "Flexibility is fine when chosen calmly. Resentful avoidance teaches neither of you." }
         ]
       },
       {
-        title: "Screen-time cliff",
-        text: "The tablet timer ends. Your child yells, 'I hate you!' and clutches the screen to their chest.",
+        title: "Dinner is wrong",
+        text: "At the end of a long day, your child cries because the pasta has sauce touching it. You worked hard on dinner.",
         choices: [
-          { text: "Breathe low and say: 'It is hard to stop. I will keep the tablet safe. You can stomp to the couch or crawl like a bear.'", calm: 17, storm: -15, note: "You did not argue with the words; you guided the transition." },
-          { text: "Grab the tablet and shout: 'Fine, no screens for a month!'", calm: -17, storm: 19, note: "Big consequences often come from our alarm. Shrink it: repair, then name the next step." },
-          { text: "Give five more minutes without saying anything.", calm: -5, storm: 7, note: "A quiet extension may postpone the storm. Pair flexibility with a clear new plan." }
+          { text: "Put both feet on the floor: 'You wanted plain pasta. This is dinner. You may eat the parts you choose.'", calm: 14, storm: -11, note: "You protected your effort and their autonomy without becoming the food police." },
+          { text: "Say: 'I guess my cooking is never good enough for you.'", calm: -12, storm: 15, note: "That hurt feeling is real, but guilt is heavy for a child. Repair and simplify." },
+          { text: "Immediately make a separate meal while muttering under your breath.", calm: -7, storm: 9, note: "Rescue plus resentment drains you. A neutral backup plan works better." }
+        ]
+      },
+      {
+        title: "Toothbrush standoff",
+        text: "The toothbrush is ready, but your child clamps their mouth shut and laughs. You are two minutes from losing your cool.",
+        choices: [
+          { text: "Smile small: 'Teeth need cleaning. Should I brush like a robot or a sleepy sloth?'", calm: 16, storm: -14, note: "Playfulness can move a stuck transition without giving up the limit." },
+          { text: "Pry their mouth open because this has to get done.", calm: -16, storm: 19, note: "Safety and consent matter. Pause, repair, and use playful cooperation." },
+          { text: "Skip it angrily and say cavities will be their fault.", calm: -8, storm: 10, note: "A skipped night is not a character lesson. Make tomorrow's plan when calm." }
+        ]
+      },
+      {
+        title: "Missing lovey panic",
+        text: "At bedtime, the favorite stuffed bunny is missing. Your child sobs like the world is ending, and you still have dishes waiting.",
+        choices: [
+          { text: "Name it: 'Bunny helps sleep feel safe. We will do a three-minute search, then choose a helper friend.'", calm: 17, storm: -15, note: "You honored the attachment and created a time-bounded plan." },
+          { text: "Say: 'It is just a toy. You are too old for this.'", calm: -14, storm: 17, note: "Comfort objects are nervous-system tools. Respect first, solve second." },
+          { text: "Search the whole house frantically until everyone is more upset.", calm: -5, storm: 8, note: "Your urgency can amplify the panic. Time-box the search and narrate safety." }
+        ]
+      },
+      {
+        title: "Morning-late echo",
+        text: "Yesterday's rough bedtime means everyone woke up late. Your child refuses socks, and the same hot feeling rises in your chest.",
+        choices: [
+          { text: "Whisper 'new moment' and say: 'Sock problem first. Fuzzy socks or no-show socks?'", calm: 15, storm: -13, note: "You did not let last night's stress write this morning's script." },
+          { text: "Announce that bedtime was awful and now they are ruining morning too.", calm: -15, storm: 18, note: "Linking meltdowns can create shame. Keep this moment small and solvable." },
+          { text: "Do every task for them while silently boiling.", calm: -6, storm: 8, note: "Helping is kind; silent boiling is costly. Say the next step out loud." }
+        ]
+      },
+      {
+        title: "Story cliffhanger",
+        text: "You stop at the planned chapter. Your child cries that they cannot sleep unless they know what happens next.",
+        choices: [
+          { text: "Say: 'Cliffhangers are hard. Let's guess one silly ending, bookmark it, and save the rest for tomorrow.'", calm: 18, storm: -16, note: "You gave the brain closure without surrendering the boundary." },
+          { text: "Read until you are exhausted and annoyed.", calm: -6, storm: 9, note: "Extra reading can be sweet when chosen freely. Resentment means the boundary got lost." },
+          { text: "Take the book away and say stories are canceled this week.", calm: -13, storm: 16, note: "A tired threat can make bedtime feel unsafe. Repair with a smaller limit." }
+        ]
+      },
+      {
+        title: "Doorway comeback",
+        text: "You finally leave the room. Your child pops up in the doorway crying, 'I need to tell you one thing!' for the fourth time.",
+        choices: [
+          { text: "Return them gently: 'Your brain has more words. Put them in your dream pocket. I will listen at breakfast.'", calm: 17, storm: -14, note: "You validated the urge to connect and protected sleep." },
+          { text: "Debate whether the thing is important from across the hallway.", calm: -7, storm: 10, note: "Hallway debates wake everyone up. Use one quiet repeatable phrase." },
+          { text: "Yell from the couch that you are done parenting for the night.", calm: -16, storm: 18, note: "You deserve off-duty time. Say it as a boundary, not a rupture." }
         ]
       }
     ];
 
-    const totalRounds = scenarios.length;
+    const roundsPerGame = 5;
+    let gameScenarios = [];
     let calm = 50;
     let storm = 50;
     let round = 0;
@@ -380,15 +429,15 @@
     }
 
     function renderScenario() {
-      if (round >= totalRounds) {
+      if (round >= roundsPerGame) {
         renderSummary();
         return;
       }
 
       isComplete = false;
-      const scenario = scenarios[round];
+      const scenario = gameScenarios[round];
       scenarioCard.classList.remove("is-changing");
-      roundPill.textContent = `Round ${round + 1} of ${totalRounds}`;
+      roundPill.textContent = `Round ${round + 1} of ${roundsPerGame}`;
       scenarioTitle.textContent = scenario.title;
       scenarioText.textContent = scenario.text;
       choices.innerHTML = "";
@@ -431,12 +480,24 @@
       calm = 50;
       storm = 50;
       round = 0;
+      gameScenarios = shuffleScenarios();
       steadyStreak = 0;
       feedback.textContent = "Choose a response. After each choice, read the coaching note out loud like a mini rehearsal.";
       updateMeters();
       renderScenario();
     });
 
+    function shuffleScenarios() {
+      return [...scenarios]
+        .sort(() => Math.random() - 0.5)
+        .slice(0, roundsPerGame)
+        .map(scenario => ({
+          ...scenario,
+          choices: [...scenario.choices].sort(() => Math.random() - 0.5)
+        }));
+    }
+
+    gameScenarios = shuffleScenarios();
     updateMeters();
     renderScenario();
   </script>
