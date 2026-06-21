@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calm Coach: Meltdown Moments</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --cream: #fff8ec;
+      --peach: #ffcfba;
+      --rose: #ef7f83;
+      --plum: #5b3b58;
+      --sage: #8fb9a8;
+      --sky: #a8d8ea;
+      --gold: #f2b84b;
+      --ink: #2f2630;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(255, 207, 186, .8), transparent 34rem),
+        radial-gradient(circle at bottom right, rgba(168, 216, 234, .7), transparent 30rem),
+        var(--cream);
+      color: var(--ink);
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+    }
+
+    main {
+      width: min(960px, 100%);
+      background: rgba(255, 255, 255, .82);
+      border: 1px solid rgba(91, 59, 88, .12);
+      border-radius: 28px;
+      box-shadow: 0 24px 70px rgba(91, 59, 88, .18);
+      overflow: hidden;
+    }
+
+    header {
+      padding: 2rem;
+      background: linear-gradient(135deg, rgba(255, 207, 186, .75), rgba(168, 216, 234, .65));
+    }
+
+    h1 { margin: 0 0 .35rem; font-size: clamp(2rem, 5vw, 4rem); color: var(--plum); }
+    p { line-height: 1.55; }
+
+    .tagline { margin: 0; max-width: 58ch; font-size: 1.1rem; }
+
+    .game {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 1.2rem;
+      padding: 1.2rem;
+    }
+
+    .panel {
+      background: white;
+      border-radius: 22px;
+      border: 1px solid rgba(91, 59, 88, .12);
+      padding: 1.2rem;
+    }
+
+    .meters { display: grid; gap: 1rem; }
+    .meter-label { display: flex; justify-content: space-between; font-weight: 800; color: var(--plum); }
+    .bar { height: 18px; border-radius: 99px; background: #eee5e8; overflow: hidden; }
+    .fill { height: 100%; width: 50%; border-radius: inherit; transition: width .35s ease; }
+    #calmFill { background: linear-gradient(90deg, var(--sage), var(--sky)); }
+    #stormFill { background: linear-gradient(90deg, var(--gold), var(--rose)); }
+
+    .routine {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .7rem;
+      margin-top: 1rem;
+    }
+
+    .step {
+      padding: .85rem;
+      border-radius: 16px;
+      background: var(--cream);
+      border: 1px dashed rgba(91, 59, 88, .25);
+    }
+
+    .step strong { display: block; color: var(--plum); }
+
+    .scenario {
+      min-height: 150px;
+      border-radius: 20px;
+      padding: 1.2rem;
+      background: linear-gradient(135deg, rgba(255, 248, 236, .95), rgba(255, 207, 186, .45));
+      border: 1px solid rgba(239, 127, 131, .2);
+    }
+
+    .scenario h2 { margin-top: 0; color: var(--plum); }
+
+    .choices { display: grid; gap: .8rem; margin-top: 1rem; }
+
+    button {
+      border: 0;
+      border-radius: 16px;
+      padding: 1rem;
+      font: inherit;
+      font-weight: 800;
+      color: var(--plum);
+      background: #f7ebef;
+      cursor: pointer;
+      text-align: left;
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+
+    button:hover, button:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(91, 59, 88, .14);
+      outline: 3px solid rgba(143, 185, 168, .6);
+    }
+
+    .primary {
+      background: var(--plum);
+      color: white;
+      text-align: center;
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .feedback {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 18px;
+      background: rgba(143, 185, 168, .18);
+      border: 1px solid rgba(143, 185, 168, .35);
+      min-height: 86px;
+    }
+
+    .microcopy {
+      color: #6f6170;
+      font-size: .92rem;
+    }
+
+    @media (max-width: 760px) {
+      .game { grid-template-columns: 1fr; }
+      .routine { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Calm Coach</h1>
+      <p class="tagline">A gentle practice game for moms: build the pause, scan your body, and choose a steady response during kid meltdowns.</p>
+    </header>
+
+    <section class="game" aria-label="Calm Coach game">
+      <aside class="panel">
+        <h2>S.C.A.N. Calm</h2>
+        <p class="microcopy">Use this tiny routine before you speak. Your goal is not perfect parenting. Your goal is one regulated next move.</p>
+        <div class="routine">
+          <div class="step"><strong>S — Stop</strong>Unclench. Plant your feet.</div>
+          <div class="step"><strong>C — Check</strong>Ask: “What am I feeling?”</div>
+          <div class="step"><strong>A — Anchor</strong>One slow exhale, longer than inhale.</div>
+          <div class="step"><strong>N — Name</strong>Name the need before the behavior.</div>
+        </div>
+        <div class="meters" aria-live="polite">
+          <div>
+            <div class="meter-label"><span>Mom calm</span><span id="calmScore">50</span></div>
+            <div class="bar"><div class="fill" id="calmFill"></div></div>
+          </div>
+          <div>
+            <div class="meter-label"><span>Storm meter</span><span id="stormScore">50</span></div>
+            <div class="bar"><div class="fill" id="stormFill"></div></div>
+          </div>
+        </div>
+        <button class="primary" id="resetButton">Start over</button>
+      </aside>
+
+      <section class="panel">
+        <div class="scenario">
+          <h2 id="scenarioTitle"></h2>
+          <p id="scenarioText"></p>
+        </div>
+        <div class="choices" id="choices"></div>
+        <div class="feedback" id="feedback">Choose a response. After each choice, read the coaching note out loud like a mini rehearsal.</div>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    const scenarios = [
+      {
+        title: "The shoe volcano",
+        text: "Your child screams, drops to the floor, and kicks one shoe across the room because it feels 'wrong.' You are already late.",
+        choices: [
+          { text: "S.C.A.N.: plant feet, exhale, say: 'The shoe feels awful. I can help. First one breath with me.'", calm: 16, storm: -14, note: "You named the sensory problem and slowed the room down before solving." },
+          { text: "Say: 'Stop it. We are late because of you.'", calm: -14, storm: 18, note: "That is an understandable stress reaction. Repair move: 'I got sharp. I am trying again.'" },
+          { text: "Silently force the shoe on to get out the door.", calm: -8, storm: 12, note: "Fast fixes can cost connection. Try offering two choices after your breath." }
+        ]
+      },
+      {
+        title: "Snack cup disaster",
+        text: "The blue cup is dirty. Your child sobs that the green cup is 'the worst cup in the whole world.'",
+        choices: [
+          { text: "Whisper to yourself: 'Small cup, big feelings.' Then offer: 'Blue cup after washing, or green cup with a silly straw?'", calm: 14, storm: -12, note: "You kept the problem small while respecting the feeling." },
+          { text: "Lecture about gratitude and all the children who would love any cup.", calm: -8, storm: 10, note: "Logic rarely lands during alarm. Save teaching for after connection." },
+          { text: "Walk away and slam the cabinet.", calm: -16, storm: 16, note: "If you need space, narrate safety: 'I am taking ten seconds so I do not yell.'" }
+        ]
+      },
+      {
+        title: "Bedtime bargaining",
+        text: "After three stories, your child screams for another and says you are mean. Your chest gets hot.",
+        choices: [
+          { text: "Put a hand on your heart, lower your voice, and say: 'You wish stories never ended. Bedtime is still now. I will sit for two quiet minutes.'", calm: 18, storm: -16, note: "Warm boundary: empathy plus limit. That is co-regulation." },
+          { text: "Argue point-by-point about how many stories you already read.", calm: -7, storm: 9, note: "Debate invites more debate. Repeat the boundary like a calm chorus." },
+          { text: "Threaten to take away tomorrow's stories.", calm: -12, storm: 14, note: "Threats can escalate panic. Try a repair and restate the next safe step." }
+        ]
+      }
+    ];
+
+    let calm = 50;
+    let storm = 50;
+    let round = 0;
+
+    const clamp = value => Math.max(0, Math.min(100, value));
+
+    function updateMeters() {
+      calm = clamp(calm);
+      storm = clamp(storm);
+      calmScore.textContent = calm;
+      stormScore.textContent = storm;
+      calmFill.style.width = `${calm}%`;
+      stormFill.style.width = `${storm}%`;
+    }
+
+    function renderScenario() {
+      const scenario = scenarios[round % scenarios.length];
+      scenarioTitle.textContent = scenario.title;
+      scenarioText.textContent = scenario.text;
+      choices.innerHTML = "";
+      scenario.choices.forEach(choice => {
+        const button = document.createElement("button");
+        button.textContent = choice.text;
+        button.addEventListener("click", () => choose(choice));
+        choices.appendChild(button);
+      });
+    }
+
+    function choose(choice) {
+      calm += choice.calm;
+      storm += choice.storm;
+      updateMeters();
+      feedback.textContent = choice.note;
+      round += 1;
+      setTimeout(renderScenario, 700);
+    }
+
+    resetButton.addEventListener("click", () => {
+      calm = 50;
+      storm = 50;
+      round = 0;
+      feedback.textContent = "Choose a response. After each choice, read the coaching note out loud like a mini rehearsal.";
+      updateMeters();
+      renderScenario();
+    });
+
+    updateMeters();
+    renderScenario();
+  </script>
+</body>
+</html>
